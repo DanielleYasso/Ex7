@@ -10,6 +10,8 @@ for line in filename:
 
     # check if words are already in dictionary, increment by 1
     for word in words:
+        word = word.lower()
+        word = word.strip(".'?,!\"_-:;")
         if word in word_count:
             word_count[word] += 1
         else:
@@ -18,3 +20,4 @@ for line in filename:
 # print key value pairs
 for word, count in word_count.iteritems():
     print "%s: %d" % (word, count)
+
