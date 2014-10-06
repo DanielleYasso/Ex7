@@ -1,3 +1,20 @@
+def strip_words(word_list):
+    for word in word_list:
+        word = word.upper()
+        word = word.strip(".'?,!\"_-:;*()")
+
+        if "--" in word:
+            more_words = word.split("--")
+            strip_words(more_words)
+
+        add_word_to_dictionary(word)
+
+def add_word_to_dictionary(word):
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
 # open file
 filename = open("twain.txt")
 
@@ -6,27 +23,10 @@ word_count = {}
 
 # loop through file reading lines and separate lines into words
 for line in filename: 
+    # split line into list of separate words
     words =line.rstrip().split()
-
-    # check if words are already in dictionary, increment by 1
-    for word in words:
-        word = word.upper()
-        word = word.strip(".'?,!\"_-:;*()")
-
-        # split words more - separate those containing --
-        if "--" in word:
-            more_words = word.split("--")
-            for word in more_words:
-                word = word.strip(".'?,!\"_-:;*()")
-                if word in word_count:
-                    word_count[word] += 1
-                else:
-                    word_count[word] = 1
-        else:
-            if word in word_count:
-                word_count[word] += 1
-            else:
-                word_count[word] = 1
+    # strip & format words, and add to dictionary with counts
+    strip_words(words)
 
 # get items (count values) from word_count
 item_list = word_count.values()
