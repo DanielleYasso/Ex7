@@ -6,8 +6,8 @@ def strip_words(word_list):
         if "--" in word:
             more_words = word.split("--")
             strip_words(more_words)
-
-        add_word_to_dictionary(word)
+        else:
+            add_word_to_dictionary(word)
 
 def add_word_to_dictionary(word):
     if word in word_count:
@@ -36,7 +36,7 @@ item_list = list(set(item_list))
 item_list.sort()
 item_list.reverse()
 
-# iterate
+# iterate over item list of word count values
 for value in item_list:
     key_list_for_value = []
     print "***********************"
