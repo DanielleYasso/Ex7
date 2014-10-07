@@ -29,12 +29,17 @@ def main():
     count_words ={}
     for word, count in word_count.iteritems():
         # add word to list for that count
+
+        # this works but uses extra memory
         # count_words[count] = count_words.get(count, []) + [word]
 
+        # this doesn't work. list is never added to dictionary
         # current_word_list = count_words.get(count, [])
         # current_word_list.append(word)
 
-        count_words.get(count, []).append(word)
+        # this doens't work with .get, only with .setdefault
+        # count_words.get(count, []).append(word)
+        count_words.setdefault(count, []).append(word)
 
     # create a key_list of the count keys
     count_list = count_words.keys()
@@ -45,8 +50,7 @@ def main():
     # loop through key list, and print associated list of words from count_words dictionary
     for count in count_list: 
         print "Words that occur %d times:" % count
-        count_words[count].sort()
-        for word in count_words[count]:
+        for word in sorted(count_words[count]):
             print word  
 
 
