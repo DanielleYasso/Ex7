@@ -1,33 +1,36 @@
-def strip_words(word_list):
+def strip_words(word_list, word_count):
     for word in word_list:
         word = word.upper()
         word = word.strip(".'?,!\"_-:;*()")
 
         if "--" in word:
             more_words = word.split("--")
-            strip_words(more_words)
+            strip_words(more_words, word_count)
         else:
-            add_word_to_dictionary(word)
+            add_word_to_dictionary(word, word_count)
 
-def add_word_to_dictionary(word):
+    return word_count
+
+def add_word_to_dictionary(word, word_count):
     word_count[word] = word_count.get(word, 0) + 1  
 
-# create empty dictionary to hold words and counts
-word_count = {}
-count_words ={}
+
 
 def main():
     # open file
     filename = open("twain.txt")
-
+    
+    # create empty dictionary to hold words and counts
+    word_count = {}
     # loop through file reading lines and separate lines into words
     for line in filename: 
         # split line into list of separate words
         words =line.rstrip().split()
         # strip & format words, and add to dictionary with counts
-        strip_words(words)
+        word_count = strip_words(words, word_count)
 
     # loop through existing word:count dictionary to create new dictionary with count:word key:value pairs
+    count_words ={}
     for word, count in word_count.iteritems():
         # add word to list for that count
         count_words[count] = count_words.get(count, []) + [word]
