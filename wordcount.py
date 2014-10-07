@@ -9,12 +9,8 @@ def strip_words(word_list, word_count):
         else:
             add_word_to_dictionary(word, word_count)
 
-    return word_count
-
 def add_word_to_dictionary(word, word_count):
     word_count[word] = word_count.get(word, 0) + 1  
-
-
 
 def main():
     # open file
@@ -27,7 +23,7 @@ def main():
         # split line into list of separate words
         words =line.rstrip().split()
         # strip & format words, and add to dictionary with counts
-        word_count = strip_words(words, word_count)
+        strip_words(words, word_count)
 
     # loop through existing word:count dictionary to create new dictionary with count:word key:value pairs
     count_words ={}
