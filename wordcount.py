@@ -29,7 +29,12 @@ def main():
     count_words ={}
     for word, count in word_count.iteritems():
         # add word to list for that count
-        count_words[count] = count_words.get(count, []) + [word]
+        # count_words[count] = count_words.get(count, []) + [word]
+
+        # current_word_list = count_words.get(count, [])
+        # current_word_list.append(word)
+
+        count_words.get(count, []).append(word)
 
     # create a key_list of the count keys
     count_list = count_words.keys()
